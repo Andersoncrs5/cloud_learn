@@ -1,0 +1,36 @@
+#create one vpc and get vpcId
+
+aws ec2 create-vpc \
+  --cidr-block 10.0.0.0/16 \
+  --endpoint-url=http://localhost:4566
+
+id = vpc-5014e3bc43bdbf720
+
+# create one subnet
+aws ec2 create-subnet \
+  --vpc-id vpc-a13bf10f53e8f5f1d \
+  --cidr-block 10.0.1.0/24 \
+  --availability-zone us-east-1a \
+  --endpoint-url=http://localhost:4566
+
+subnet-9146d6c8e397b990d
+
+# create security-group
+aws ec2 create-security-group \
+  --group-name meu-grupo \
+  --description "Grupo teste EC2" \
+  --vpc-id vpc-a13bf10f53e8f5f1d \
+  --endpoint-url=http://localhost:4566
+
+sg-388ce918cf288498a
+
+# create ec2
+
+aws ec2 run-instances \
+    --image-id ami-12345678 \
+    --instance-type m4.large \
+    --key-name 1 \
+    --security-group-ids sg-388ce918cf288498a \
+    --subnet-id subnet-9146d6c8e397b990d \
+    --endpoint-url=http://localhost:4566 \
+    --count 1
