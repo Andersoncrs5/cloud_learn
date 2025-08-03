@@ -1,0 +1,3 @@
+# list instance
+
+aws ec2 describe-instances --endpoint-url=http://localhost:4566
