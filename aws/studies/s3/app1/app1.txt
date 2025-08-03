@@ -1,0 +1,40 @@
+# create bucket
+aws --endpoint-url=http://localhost:4566 s3api create-bucket --bucket images
+
+# list all buckets
+aws --endpoint-url=http://localhost:4566 s3api list-buckets
+
+# upload file
+
+command base:
+aws --endpoint-url=http://localhost:4566 s3api put-object \ --bucket <nome-do-seu-bucket> \ --key <nome-do-arquivo-destino> \ --body <caminho-do-arquivo-local>
+
+example:
+aws --endpoint-url=http://localhost:4566 s3api put-object \ --bucket files \ --key test.txt \ --body ./studies/s3/app1/test.txt
+
+# upload file public
+aws --endpoint-url=http://localhost:4566 s3api put-object \ --bucket <nome-do-seu-bucket> \ --key <nome-do-arquivo-destino> \ --body <caminho-do-arquivo-local> \ --acl public-read
+
+# example
+aws --endpoint-url=http://localhost:4566 s3api put-object  --bucket images --key saber_alter --body ./studies/s3/app1/files/1074021.png --acl public-read
+
+aws --endpoint-url=http://localhost:4566 s3api put-object --bucket images --key saber_alter.png --body ./studies/s3/app1/files/1074021.png --acl public-read --content-type image/png
+
+# delete object
+
+aws --endpoint-url=http://localhost:4566 s3api delete-object --bucket images --key saber_alter.png
+
+
+# generate url
+
+aws --endpoint-url=http://localhost:4566 s3 presign s3://images/saber_alter.png
+
+
+# list objects
+
+aws --endpoint-url=http://localhost:4566 s3api list-objects --bucket images
+
+
+# active logs:
+
+aws --endpoint-url=http://localhost:4566 s3api put-bucket-logging --bucket images --bucket-logging-status '{"LoggingEnabled": {"TargetBucket": "bucket-de-logs","TargetPrefix": "logs/"}}'
