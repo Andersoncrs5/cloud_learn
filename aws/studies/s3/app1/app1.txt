@@ -38,3 +38,7 @@ aws --endpoint-url=http://localhost:4566 s3api list-objects --bucket images
 # active logs:
 
 aws --endpoint-url=http://localhost:4566 s3api put-bucket-logging --bucket images --bucket-logging-status '{"LoggingEnabled": {"TargetBucket": "bucket-de-logs","TargetPrefix": "logs/"}}'
+
+
+# render html pag
+aws --endpoint-url=http://localhost:4566 s3api put-object --bucket files --key hello.html --body ./studies/s3/app1/files/index.html --acl public-read --content-type text/html
